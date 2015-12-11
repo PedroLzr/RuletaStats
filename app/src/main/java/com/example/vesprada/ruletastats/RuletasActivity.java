@@ -8,33 +8,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends Activity {
+public class RuletasActivity extends Activity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        Button btnTiradas = (Button) findViewById(R.id.btnTiradas);
-        Button btnJugadas = (Button) findViewById(R.id.btnJugadas);
-        Button btnRuletas = (Button) findViewById(R.id.btnRuletas);
-        Button btnCrupiers = (Button) findViewById(R.id.btnCrupiers);
-
-        btnTiradas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, TiradasActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        btnRuletas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, RuletasActivity.class);
-                startActivity(intent);
-            }
-        });
+        setContentView(R.layout.activity_ruletas);
 
     }
 
@@ -59,4 +38,6 @@ public class MainActivity extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }
