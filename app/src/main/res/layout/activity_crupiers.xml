@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:paddingLeft="10dp"
-            android:text="Ruletas"
+            android:text="Crupiers"
             android:textSize="30dp"
             android:layout_weight="6"
             android:paddingTop="10dp"
@@ -30,7 +30,7 @@
     </LinearLayout>
 
     <ListView
-        android:id="@+id/listViewRuletas"
+        android:id="@+id/listViewCrupiers"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"/>
 

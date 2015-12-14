@@ -36,6 +36,14 @@ public class MainActivity extends Activity {
             }
         });
 
+        btnCrupiers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CrupiersActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override
