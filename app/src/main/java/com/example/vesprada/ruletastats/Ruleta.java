@@ -2,6 +2,11 @@ package com.example.vesprada.ruletastats;
 
 public class Ruleta {
 
+    public static final String TABLE = "Ruleta";
+
+    public static final String KEY_ID = "id";
+    public static final String KEY_NOMBRE = "nombre";
+
     private int ID;
     private String nombre;
 
