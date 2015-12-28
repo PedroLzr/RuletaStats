@@ -1,11 +1,14 @@
 package com.example.vesprada.ruletastats;
 
 import android.app.Activity;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SimpleCursorAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +49,32 @@ public class TiradasActivity extends Activity{
         btn9 = (Button)findViewById(R.id.btn9);
         btnBorrar = (Button)findViewById(R.id.btnBorrar);
         btnGuardar = (Button)findViewById(R.id.btnGuardar);
+
+        final Spinner spRuleta = (Spinner) findViewById(R.id.spRuleta);
+        final Spinner spCrupier = (Spinner) findViewById(R.id.spCrupier);
+
+        RuletaDAO rDAO = new RuletaDAO(this);
+
+        SimpleCursorAdapter spRuletaAdapter = new SimpleCursorAdapter(this,
+                android.R.layout.simple_spinner_item,
+                rDAO.getRuletas(),
+                new String[]{Ruleta.KEY_NOMBRE},
+                new int[]{android.R.id.text1},
+                SimpleCursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+
+        spRuleta.setAdapter(spRuletaAdapter);
+
+        CrupierDAO cDAO = new CrupierDAO(this);
+
+        SimpleCursorAdapter spCrupierAdapter = new SimpleCursorAdapter(this,
+                android.R.layout.simple_spinner_item,
+                cDAO.getCrupiers(),
+                new String[]{Crupier.KEY_NOMBRE},
+                new int[]{android.R.id.text1},
+                SimpleCursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+
+        spCrupier.setAdapter(spCrupierAdapter);
+
 
         btn0.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -200,6 +229,18 @@ public class TiradasActivity extends Activity{
                 tvTirada.setText("");
 
                 if(tirada < 37){
+
+                    RuletaDAO rDAO = new RuletaDAO(TiradasActivity.this);
+                    CrupierDAO cDAO = new CrupierDAO(TiradasActivity.this);
+
+                    int idRuleta = Integer.parseInt(((Cursor) spRuleta.getSelectedItem()).getString(0));
+                    int idCrupier = Integer.parseInt(((Cursor) spCrupier.getSelectedItem()).getString(0));
+                    int numero = tirada;
+
+                    Tirada t = new Tirada(idRuleta, idCrupier, numero);
+                    TiradaDAO tDAO = new TiradaDAO(TiradasActivity.this);
+                    tDAO.insert(t);
+
                     Toast.makeText(getApplicationContext(), "Tirada guardada", Toast.LENGTH_SHORT).show();
                 }
                 else{
@@ -212,25 +253,4 @@ public class TiradasActivity extends Activity{
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

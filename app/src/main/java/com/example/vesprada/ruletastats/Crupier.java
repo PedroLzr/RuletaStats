@@ -14,8 +14,7 @@ public class Crupier {
 
     public Crupier(){}
 
-    public Crupier(int id, String nombre, String descripcion){
-        this.ID = id;
+    public Crupier(String nombre, String descripcion){
         this.nombre = nombre;
         this.descripcion = descripcion;
     }

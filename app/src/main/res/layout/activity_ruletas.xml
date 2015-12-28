@@ -21,6 +21,7 @@
             android:textAlignment="center"/>
 
         <Button
+            android:id="@+id/btnCrearRuleta"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:text="+"

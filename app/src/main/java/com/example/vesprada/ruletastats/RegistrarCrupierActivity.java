@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class RegistrarCrupierActivity extends Activity {
 
@@ -14,32 +16,26 @@ public class RegistrarCrupierActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrarcrupier);
 
-        EditText nombreCrupier = (EditText) findViewById(R.id.etNombreCrupier);
-        EditText descripcionCrupier = (EditText) findViewById(R.id.etDescripcionCrupier);
+        final EditText nombreCrupier = (EditText) findViewById(R.id.etNombreCrupier);
+        final EditText descripcionCrupier = (EditText) findViewById(R.id.etDescripcionCrupier);
         Button btnNuevoCrupier = (Button) findViewById(R.id.btnNuevoCrupier);
 
-    }
+        btnNuevoCrupier.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(nombreCrupier.getText().toString().equals("")){
+                    Toast.makeText(RegistrarCrupierActivity.this, "Introduce un nombre para el crupier", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Crupier c = new Crupier(nombreCrupier.getText().toString(), descripcionCrupier.getText().toString());
+                    CrupierDAO cDAO = new CrupierDAO(RegistrarCrupierActivity.this);
+                    cDAO.insert(c);
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+                    Toast.makeText(RegistrarCrupierActivity.this, "Crupier guardado", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
 }

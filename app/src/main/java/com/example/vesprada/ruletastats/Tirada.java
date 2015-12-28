@@ -17,8 +17,7 @@ public class Tirada {
 
     public Tirada(){}
 
-    public Tirada(int id, int id_ruleta, int id_crupier, int numero){
-        this.ID = id;
+    public Tirada(int id_ruleta, int id_crupier, int numero){
         this.id_ruleta = id_ruleta;
         this.id_crupier = id_crupier;
         this.numero = numero;

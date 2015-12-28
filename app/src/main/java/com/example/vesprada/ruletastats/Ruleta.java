@@ -9,11 +9,11 @@ public class Ruleta {
 
     private int ID;
     private String nombre;
+    //private int electrica;
 
     public Ruleta(){}
 
-    public Ruleta(int id, String nombre){
-        this.ID = id;
+    public Ruleta(String nombre){
         this.nombre = nombre;
     }
 

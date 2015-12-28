@@ -19,7 +19,8 @@
             android:textSize="30dp"/>
 
         <Spinner
-            android:layout_width="wrap_content"
+            android:id="@+id/spRuleta"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"/>
 
     </LinearLayout>
@@ -38,7 +39,8 @@
             android:textSize="30dp"/>
 
         <Spinner
-            android:layout_width="wrap_content"
+            android:id="@+id/spCrupier"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"/>
 
     </LinearLayout>
@@ -56,10 +58,13 @@
             android:text="Tirada: "
             android:textSize="30dp"/>
 
-        <EditText
+        <TextView
             android:id="@+id/tvTirada"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="X"
+            android:textSize="26dp"
+            android:gravity="center"/>
 
     </LinearLayout>
 
