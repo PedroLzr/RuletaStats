@@ -18,7 +18,7 @@
 
         <Spinner
             android:id="@+id/spRuleta"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"/>
 
     </LinearLayout>
@@ -38,10 +38,18 @@
 
         <Spinner
             android:id="@+id/spCrupier"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"/>
 
     </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/cbSoloRuleta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Jugadas solo por ruleta"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"/>
 
     <Button
         android:id="@+id/btnMostrarJugadas"

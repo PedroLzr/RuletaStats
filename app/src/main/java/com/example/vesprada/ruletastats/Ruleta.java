@@ -6,15 +6,27 @@ public class Ruleta {
 
     public static final String KEY_ID = "id";
     public static final String KEY_NOMBRE = "nombre";
+    public static final String KEY_ELECTRICA = "electrica";
 
     private int ID;
     private String nombre;
-    //private int electrica;
+    private int electrica;
 
     public Ruleta(){}
 
     public Ruleta(String nombre){
         this.nombre = nombre;
+    }
+
+    public Ruleta(String nombre, int elec){
+        this.nombre = nombre;
+        this.electrica = elec;
+    }
+
+    public Ruleta(int id, String nombre, int elec){
+        this.ID = id;
+        this.nombre = nombre;
+        this.electrica = elec;
     }
 
     public int getID() {
@@ -31,5 +43,13 @@ public class Ruleta {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public int getElectrica() {
+        return electrica;
+    }
+
+    public void setElectrica(int electrica) {
+        this.electrica = electrica;
     }
 }

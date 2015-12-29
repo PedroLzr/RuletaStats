@@ -4,6 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
+import java.util.ArrayList;
 
 public class RuletaDAO {
 
@@ -17,6 +20,7 @@ public class RuletaDAO {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(Ruleta.KEY_NOMBRE, ruleta.getNombre());
+        values.put(Ruleta.KEY_ELECTRICA, ruleta.getElectrica());
 
 
         long ruleta_id = db.insert(Ruleta.TABLE, null, values);
@@ -41,6 +45,30 @@ public class RuletaDAO {
         else{
             return 0;
         }
+    }
+
+    public ArrayList<Ruleta> getRuletasArray(){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ArrayList<Ruleta> ruletas = new ArrayList<Ruleta>();
+
+        String sql = "SELECT " + Ruleta.KEY_ID
+        + ", " + Ruleta.KEY_NOMBRE
+        + ", " + Ruleta.KEY_ELECTRICA + " FROM " + Ruleta.TABLE + ";";
+
+        Cursor c = db.rawQuery(sql, null);
+
+        if(c.moveToFirst()){
+            do{
+                Ruleta r = new Ruleta(c.getInt(0), c.getString(1), c.getInt(2));
+                ruletas.add(r);
+            }while(c.moveToNext());
+        }
+        else{
+            Log.v("SQLite01", "No se encuentra nada");
+            ruletas.add(new Ruleta(0, "No hay ruletas", 0));
+        }
+
+        return ruletas;
     }
 
 }

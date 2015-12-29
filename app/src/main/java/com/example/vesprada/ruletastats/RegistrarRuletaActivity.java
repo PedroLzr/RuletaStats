@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 public class RegistrarRuletaActivity extends Activity{
 
+    static int elec = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +22,17 @@ public class RegistrarRuletaActivity extends Activity{
         final CheckBox cbElectrica = (CheckBox) findViewById(R.id.cbElectrica);
         Button btnNuevaRuleta = (Button) findViewById(R.id.btnNuevaRuleta);
 
+        cbElectrica.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (cbElectrica.isChecked()) {
+                    elec = 1;
+                } else {
+                    elec = 0;
+                }
+            }
+        });
+
         btnNuevaRuleta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -28,11 +40,15 @@ public class RegistrarRuletaActivity extends Activity{
                     Toast.makeText(RegistrarRuletaActivity.this, "Introduce un nombre para la ruleta", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    Ruleta r = new Ruleta(nombreRuleta.getText().toString());
+                    Ruleta r = new Ruleta(nombreRuleta.getText().toString(), elec);
                     RuletaDAO rDAO = new RuletaDAO(RegistrarRuletaActivity.this);
                     rDAO.insert(r);
 
                     Toast.makeText(RegistrarRuletaActivity.this, "Ruleta guardada", Toast.LENGTH_SHORT).show();
+
+                    nombreRuleta.setText("");
+                    cbElectrica.setChecked(false);
+                    elec = 0;
                 }
             }
         });

@@ -19,6 +19,12 @@ public class Crupier {
         this.descripcion = descripcion;
     }
 
+    public Crupier(int id, String nombre, String descripcion){
+        this.ID = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
+
     public int getID() {
         return ID;
     }

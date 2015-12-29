@@ -39,12 +39,33 @@ public class TiradaDAO {
 
         if(c.moveToFirst()){
             do{
-                Log.v("SQLite01", String.valueOf(c.getInt(0)));
                 numeros.add(c.getInt(0));
             }while(c.moveToNext());
         }
         else{
             Log.v("SQLite01", "No se encuentra nada");
+            numeros.add(0);
+        }
+
+        return numeros;
+    }
+
+    public ArrayList<Integer> getTiradasXRuleta(int id_ruleta){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ArrayList<Integer> numeros = new ArrayList<Integer>();
+
+        String sql = "SELECT " + Tirada.KEY_NUMERO + " FROM " + Tirada.TABLE + " WHERE " + Tirada.KEY_ID_RULETA + " = " + id_ruleta + ";";
+        Log.v("SQLite01", sql);
+        Cursor c = db.rawQuery(sql, null);
+
+        if(c.moveToFirst()){
+            do{
+                numeros.add(c.getInt(0));
+            }while(c.moveToNext());
+        }
+        else{
+            Log.v("SQLite01", "No se encuentra nada");
+            numeros.add(0);
         }
 
         return numeros;

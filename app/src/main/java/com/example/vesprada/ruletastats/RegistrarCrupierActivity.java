@@ -32,6 +32,8 @@ public class RegistrarCrupierActivity extends Activity {
                     cDAO.insert(c);
 
                     Toast.makeText(RegistrarCrupierActivity.this, "Crupier guardado", Toast.LENGTH_SHORT).show();
+                    nombreCrupier.setText("");
+                    descripcionCrupier.setText("");
                 }
             }
         });

@@ -6,5 +6,6 @@ public class ViewHolderRuletas {
 
     TextView ID;
     TextView nombre;
+    TextView electrica;
 
 }

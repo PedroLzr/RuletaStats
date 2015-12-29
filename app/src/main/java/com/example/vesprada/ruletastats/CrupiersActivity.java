@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 
 public class CrupiersActivity extends Activity {
 
@@ -16,6 +17,10 @@ public class CrupiersActivity extends Activity {
         setContentView(R.layout.activity_crupiers);
 
         Button btnCrearCrupier = (Button) findViewById(R.id.btnCrearCrupier);
+        ListView listViewCrupiers = (ListView) findViewById(R.id.listViewCrupiers);
+        CrupierDAO cDAO = new CrupierDAO(this);
+        CrupierAdapter crupierAdapter = new CrupierAdapter(this, cDAO.getCrupiersArray());
+        listViewCrupiers.setAdapter(crupierAdapter);
 
         btnCrearCrupier.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper{
 
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 8;
     private static final String DATABASE_NAME = "NoAzar.db";
 
     public DBHelper(Context context){
@@ -18,7 +18,8 @@ public class DBHelper extends SQLiteOpenHelper{
 
         String CREATE_TABLE_RULETA = "CREATE TABLE " + Ruleta.TABLE + "("
                 + Ruleta.KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + Ruleta.KEY_NOMBRE + " TEXT)";
+                + Ruleta.KEY_NOMBRE + " TEXT, "
+                + Ruleta.KEY_ELECTRICA + " INTEGER)";
 
         db.execSQL(CREATE_TABLE_RULETA);
 
@@ -33,7 +34,9 @@ public class DBHelper extends SQLiteOpenHelper{
                 + Tirada.KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + Tirada.KEY_ID_CRUPIER + " INTEGER, "
                 + Tirada.KEY_ID_RULETA + " INTEGER, "
-                + Tirada.KEY_NUMERO + " INTEGER)";
+                + Tirada.KEY_NUMERO + " INTEGER, "
+                + "FOREIGN KEY (" + Tirada.KEY_ID_CRUPIER + ") REFERENCES " + Crupier.TABLE + "(" + Tirada.KEY_ID_CRUPIER + ")"
+                + "FOREIGN KEY (" + Tirada.KEY_ID_RULETA + ") REFERENCES " + Ruleta.TABLE + "(" + Tirada.KEY_ID_RULETA + "))";
 
         db.execSQL(CREATE_TABLE_TIRADA);
 

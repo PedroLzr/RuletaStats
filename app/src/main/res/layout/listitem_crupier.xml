@@ -10,9 +10,18 @@
         android:orientation="horizontal">
 
         <TextView
+            android:text="ID: "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
             android:id="@+id/idCrupier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+        <TextView
+            android:text="Nombre: "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80dp"/>
         <TextView
             android:id="@+id/nombreCrupier"
             android:layout_width="wrap_content"

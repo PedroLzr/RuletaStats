@@ -16,6 +16,12 @@ public class CalcularJugadas {
     public static ArrayList<Integer> numerosApostados = new ArrayList<Integer>();
 
     public static void calcularNumeros(ArrayList<Integer> tiradas){
+
+        //Vaciar números salidos.
+        for(int i = 0; i < numSalidos.length; i++){
+            numSalidos[i] = 0;
+        }
+
         for (int i = 0; i < tiradas.size(); i++) {
             switch (tiradas.get(i)){
                 case 0:{
@@ -130,6 +136,11 @@ public class CalcularJugadas {
                     numSalidos[36]++;
                 }break;
             }
+        }
+
+        //Borrar array de porcentajes
+        for (int i = 0; i < porcentajeNum.length; i++) {
+            porcentajeNum[i] = 0;
         }
 
         //CALCULAR PORCENTAJE Y METERLO EN ARRAY
@@ -536,8 +547,6 @@ public class CalcularJugadas {
 
         ArrayList<String> jugadas = new ArrayList<String>();
 
-        //ArrayList<Integer> numerosApostados = new ArrayList<Integer>();
-
         //Calcular Cuadros
         if (numerosCalientesCuadro.contains(0) && numerosCalientesCuadro.contains(1) && numerosCalientesCuadro.contains(2) && numerosCalientesCuadro.contains(3)) {
             jugadas.add("Cuatro primeros");
@@ -577,8 +586,6 @@ public class CalcularJugadas {
 
         ArrayList<String> jugadas = new ArrayList<String>();
 
-        //ArrayList<Integer> numerosApostados = new ArrayList<Integer>();
-
         //Calcular Filas
         for(int i = 1; i<numSalidos.length; i=i+3){
             if(numerosCalientesFila.contains(i) && numerosCalientesFila.contains(i+1) && numerosCalientesFila.contains(i+2)){
@@ -604,8 +611,6 @@ public class CalcularJugadas {
         calcularNumeros(tiradas);
 
         ArrayList<String> jugadas = new ArrayList<String>();
-
-        //ArrayList<Integer> numerosApostados = new ArrayList<Integer>();
 
         //Calcular Caballos
         if(numerosCalientes.contains(0) && numerosCalientes.contains(1)){
@@ -675,8 +680,6 @@ public class CalcularJugadas {
 
         ArrayList<String> jugadas = new ArrayList<String>();
 
-        //ArrayList<Integer> numerosApostados = new ArrayList<Integer>();
-
         //Calcular Plenos
         for(int i = 1; i<numSalidos.length; i++){
             if(porcentajeNum[i]>3.9){
@@ -693,12 +696,7 @@ public class CalcularJugadas {
 
     public static ArrayList<String> calcularInfo(ArrayList<Integer> tiradas) {
 
-        calcularNumeros(tiradas);
-
         ArrayList<String> info = new ArrayList<String>();
-
-        //ArrayList<Integer> numerosApostados = new ArrayList<Integer>();
-
 
         //Probabilidad Real
         double probabilidadAcierto;
@@ -709,18 +707,29 @@ public class CalcularJugadas {
 
         //Probabilidad Según Estadísticas
         int sumaApostados=0;
+        double probabilidadAciertoSE = 0;
+        double probabilidadAciertoSERedondeado = 0;
         for(int i = 0; i<numSalidos.length; i++){
             if(numerosApostados.contains(i)) {
-                sumaApostados += numSalidos[i];
+                sumaApostados++;
             }
-        double probabilidadAciertoSE;
         probabilidadAciertoSE = (double) sumaApostados/tiradas.size()*100;
-        double probabilidadAciertoSERedondeado = (double) Math.round(probabilidadAciertoSE*100)/100;
-        info.add("La probabilidad estadística de acierto es de: "+probabilidadAciertoSERedondeado+"%");
+        probabilidadAciertoSERedondeado = (double) Math.round(probabilidadAciertoSE*100)/100;
         }
+
+        info.add("La probabilidad estadística de acierto es de: "+probabilidadAciertoSERedondeado+"%");
+
+        info.add("Total números apostados: " + numerosApostados.size());
+
+        numerosApostados.clear();
 
         return info;
     }
+
+
+        ///////////////////////////////////////// /////////// /////////////////////////////////////////
+        ///////////////////////////////////////// NO UTILIZAR /////////////////////////////////////////
+        ///////////////////////////////////////// /////////// /////////////////////////////////////////
 
         //Apuestas complementarias
         /*

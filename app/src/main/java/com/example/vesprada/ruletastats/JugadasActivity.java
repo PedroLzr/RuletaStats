@@ -22,7 +22,14 @@ public class JugadasActivity extends Activity{
         int id_crupier = Integer.parseInt(bundle.getString("id_crupier"));
 
         TiradaDAO tDAO = new TiradaDAO(this);
-        ArrayList<Integer> tiradas = tDAO.getTiradas(id_ruleta, id_crupier);
+        ArrayList<Integer> tiradas;
+
+        if(id_crupier == -1){
+            tiradas = tDAO.getTiradasXRuleta(id_ruleta);
+        }
+        else {
+            tiradas = tDAO.getTiradas(id_ruleta, id_crupier);
+        }
 
         TextView tvTotalTiradas = (TextView) findViewById(R.id.tvTotalTiradas);
         TextView tvPlenos = (TextView) findViewById(R.id.tvPlenos);
@@ -31,9 +38,16 @@ public class JugadasActivity extends Activity{
         TextView tvCuadros = (TextView) findViewById(R.id.tvCuadros);
         TextView tvInfo = (TextView) findViewById(R.id.tvInfo);
 
-        Log.v("SQLite01", String.valueOf(tiradas.size()));
+        TextView primeraEtiqueta = (TextView) findViewById(R.id.primeraEtiqueta);
+        TextView segundaEtiqueta = (TextView) findViewById(R.id.segundaEtiqueta);
 
-        tvTotalTiradas.setText(tiradas.size());
+        if(tiradas.size()<2){
+            primeraEtiqueta.setText("No hay suficientes tiradas para calcular jugadas");
+            segundaEtiqueta.setText("");
+        }
+        else {
+            tvTotalTiradas.setText(String.valueOf(tiradas.size()));
+        }
 
         String plenos = "";
         ArrayList<String> ArrayPlenos = CalcularJugadas.calcularPlenos(tiradas);
@@ -43,30 +57,30 @@ public class JugadasActivity extends Activity{
         tvPlenos.setText(plenos);
 
         String caballos = "";
-        ArrayList<String> ArrayCaballos = CalcularJugadas.calcularPlenos(tiradas);
+        ArrayList<String> ArrayCaballos = CalcularJugadas.calcularCaballos(tiradas);
         for(int i = 0; i<ArrayCaballos.size(); i++){
-            plenos += ArrayCaballos.get(i) + "\n";
+            caballos += ArrayCaballos.get(i) + "\n";
         }
         tvCaballos.setText(caballos);
 
         String filas = "";
-        ArrayList<String> ArrayFilas = CalcularJugadas.calcularPlenos(tiradas);
+        ArrayList<String> ArrayFilas = CalcularJugadas.calcularFilas(tiradas);
         for(int i = 0; i<ArrayFilas.size(); i++){
-            plenos += ArrayFilas.get(i) + "\n";
+            filas += ArrayFilas.get(i) + "\n";
         }
         tvFilas.setText(filas);
 
         String cuadros = "";
-        ArrayList<String> ArrayCuadros = CalcularJugadas.calcularPlenos(tiradas);
+        ArrayList<String> ArrayCuadros = CalcularJugadas.calcularCuadros(tiradas);
         for(int i = 0; i<ArrayCuadros.size(); i++){
-            plenos += ArrayCuadros.get(i) + "\n";
+            cuadros += ArrayCuadros.get(i) + "\n";
         }
         tvCuadros.setText(cuadros);
 
         String info = "";
-        ArrayList<String> ArrayInfo = CalcularJugadas.calcularPlenos(tiradas);
+        ArrayList<String> ArrayInfo = CalcularJugadas.calcularInfo(tiradas);
         for(int i = 0; i<ArrayInfo.size(); i++){
-            plenos += ArrayInfo.get(i) + "\n";
+            info += ArrayInfo.get(i) + "\n";
         }
         tvInfo.setText(info);
 
