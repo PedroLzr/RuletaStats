@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -52,6 +53,8 @@ public class TiradasActivity extends Activity{
 
         final Spinner spRuleta = (Spinner) findViewById(R.id.spRuleta);
         final Spinner spCrupier = (Spinner) findViewById(R.id.spCrupier);
+        final CheckBox cbElectricaTiradas = (CheckBox) findViewById(R.id.cbElectricaTiradas);
+        final TextView ultimoNumero = (TextView) findViewById(R.id.ultimoNumero);
 
         RuletaDAO rDAO = new RuletaDAO(this);
 
@@ -74,7 +77,6 @@ public class TiradasActivity extends Activity{
                 SimpleCursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
 
         spCrupier.setAdapter(spCrupierAdapter);
-
 
         btn0.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -237,7 +239,7 @@ public class TiradasActivity extends Activity{
                         Toast.makeText(getApplicationContext(), "Crea antes una ruleta", Toast.LENGTH_SHORT).show();
                     }
                     else {
-                        if(spCrupier.getSelectedItem() == null){
+                        if(spCrupier.getSelectedItem() == null || cbElectricaTiradas.isChecked()){
                             int idRuleta = Integer.parseInt(((Cursor) spRuleta.getSelectedItem()).getString(0));
                             int numero = tirada;
 
@@ -245,7 +247,22 @@ public class TiradasActivity extends Activity{
                             TiradaDAO tDAO = new TiradaDAO(TiradasActivity.this);
                             tDAO.insertSinCrupier(t);
 
-                            Toast.makeText(getApplicationContext(), "Tirada guardada", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Tirada guardada sin crupier", Toast.LENGTH_SHORT).show();
+
+                            if(numero == 0){
+                                ultimoNumero.setTextColor(ultimoNumero.getContext().getResources().getColor(R.color.VERDE));
+                            }
+                            else if(numero == 1 || numero == 3 || numero == 5 || numero == 7 || numero == 9 || numero == 12
+                                    || numero == 14 || numero == 16 || numero == 18 || numero == 19 || numero == 21 || numero == 23
+                                    || numero == 25 || numero == 27 || numero == 30 || numero == 32 || numero == 34 || numero == 36){
+                                ultimoNumero.setTextColor(ultimoNumero.getContext().getResources().getColor(R.color.ROJO));
+                            }
+                            else{
+                                ultimoNumero.setTextColor(ultimoNumero.getContext().getResources().getColor(R.color.NEGRO));
+                            }
+
+                            ultimoNumero.setText(String.valueOf(numero));
+
                         }
                         else {
                             int idRuleta = Integer.parseInt(((Cursor) spRuleta.getSelectedItem()).getString(0));
@@ -257,6 +274,8 @@ public class TiradasActivity extends Activity{
                             tDAO.insert(t);
 
                             Toast.makeText(getApplicationContext(), "Tirada guardada", Toast.LENGTH_SHORT).show();
+
+                            ultimoNumero.setText(String.valueOf(numero));
                         }
                     }
                 }
