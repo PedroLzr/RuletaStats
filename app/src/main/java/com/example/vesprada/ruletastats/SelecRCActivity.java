@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class SelecRCActivity extends Activity {
 
@@ -64,25 +65,35 @@ public class SelecRCActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                if(cbSoloRuleta.isChecked()){
-                    Intent intent = new Intent(SelecRCActivity.this, JugadasActivity.class);
-                    intent.putExtra("id_ruleta", ((Cursor) spRuleta.getSelectedItem()).getString(0));
-                    intent.putExtra("id_crupier", "-1");
-                    startActivity(intent);
+                if (spRuleta.getSelectedItem() == null) {
+                    Toast.makeText(SelecRCActivity.this, "No hay ninguna ruleta", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Log.v("SQLite01", ((Cursor) spRuleta.getSelectedItem()).getString(0));
-                    Log.v("SQLite01", ((Cursor) spCrupier.getSelectedItem()).getString(0));
 
-                    Intent intent = new Intent(SelecRCActivity.this, JugadasActivity.class);
-                    intent.putExtra("id_ruleta", ((Cursor) spRuleta.getSelectedItem()).getString(0));
-                    intent.putExtra("id_crupier", ((Cursor) spCrupier.getSelectedItem()).getString(0));
-                    startActivity(intent);
-                }
+                    if(spCrupier.getSelectedItem() == null){
+                        cbSoloRuleta.setChecked(true);
+                        Toast.makeText(SelecRCActivity.this, "Jugadas sin crupier", Toast.LENGTH_SHORT).show();
+                    }
 
-                cbSoloRuleta.setChecked(false);
-                if(!spCrupier.isEnabled()){
-                    spCrupier.setEnabled(true);
+                    if (cbSoloRuleta.isChecked()) {
+                        Intent intent = new Intent(SelecRCActivity.this, JugadasActivity.class);
+                        intent.putExtra("id_ruleta", ((Cursor) spRuleta.getSelectedItem()).getString(0));
+                        intent.putExtra("id_crupier", "-1");
+                        startActivity(intent);
+                    } else {
+                        Log.v("SQLite01", ((Cursor) spRuleta.getSelectedItem()).getString(0));
+                        Log.v("SQLite01", ((Cursor) spCrupier.getSelectedItem()).getString(0));
+
+                        Intent intent = new Intent(SelecRCActivity.this, JugadasActivity.class);
+                        intent.putExtra("id_ruleta", ((Cursor) spRuleta.getSelectedItem()).getString(0));
+                        intent.putExtra("id_crupier", ((Cursor) spCrupier.getSelectedItem()).getString(0));
+                        startActivity(intent);
+                    }
+
+                    cbSoloRuleta.setChecked(false);
+                    if (!spCrupier.isEnabled()) {
+                        spCrupier.setEnabled(true);
+                    }
                 }
             }
         });

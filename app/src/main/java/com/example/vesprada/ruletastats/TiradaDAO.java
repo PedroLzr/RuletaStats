@@ -28,6 +28,17 @@ public class TiradaDAO {
         return (int) tirada_id;
     }
 
+    public int insertSinCrupier(Tirada tirada){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(Tirada.KEY_ID_RULETA, tirada.getId_ruleta());
+        values.put(Tirada.KEY_NUMERO, tirada.getNumero());
+
+        long tirada_id = db.insert(Tirada.TABLE, null, values);
+        db.close();
+        return (int) tirada_id;
+    }
+
     public ArrayList<Integer> getTiradas(int id_ruleta, int id_crupier){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ArrayList<Integer> numeros = new ArrayList<Integer>();

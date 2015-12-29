@@ -230,18 +230,35 @@ public class TiradasActivity extends Activity{
 
                 if(tirada < 37){
 
-                    RuletaDAO rDAO = new RuletaDAO(TiradasActivity.this);
-                    CrupierDAO cDAO = new CrupierDAO(TiradasActivity.this);
+                    //RuletaDAO rDAO = new RuletaDAO(TiradasActivity.this);
+                    //CrupierDAO cDAO = new CrupierDAO(TiradasActivity.this);
 
-                    int idRuleta = Integer.parseInt(((Cursor) spRuleta.getSelectedItem()).getString(0));
-                    int idCrupier = Integer.parseInt(((Cursor) spCrupier.getSelectedItem()).getString(0));
-                    int numero = tirada;
+                    if(spRuleta.getSelectedItem() == null){
+                        Toast.makeText(getApplicationContext(), "Crea antes una ruleta", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        if(spCrupier.getSelectedItem() == null){
+                            int idRuleta = Integer.parseInt(((Cursor) spRuleta.getSelectedItem()).getString(0));
+                            int numero = tirada;
 
-                    Tirada t = new Tirada(idRuleta, idCrupier, numero);
-                    TiradaDAO tDAO = new TiradaDAO(TiradasActivity.this);
-                    tDAO.insert(t);
+                            Tirada t = new Tirada(idRuleta, numero);
+                            TiradaDAO tDAO = new TiradaDAO(TiradasActivity.this);
+                            tDAO.insertSinCrupier(t);
 
-                    Toast.makeText(getApplicationContext(), "Tirada guardada", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Tirada guardada", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            int idRuleta = Integer.parseInt(((Cursor) spRuleta.getSelectedItem()).getString(0));
+                            int idCrupier = Integer.parseInt(((Cursor) spCrupier.getSelectedItem()).getString(0));
+                            int numero = tirada;
+
+                            Tirada t = new Tirada(idRuleta, idCrupier, numero);
+                            TiradaDAO tDAO = new TiradaDAO(TiradasActivity.this);
+                            tDAO.insert(t);
+
+                            Toast.makeText(getApplicationContext(), "Tirada guardada", Toast.LENGTH_SHORT).show();
+                        }
+                    }
                 }
                 else{
                     Toast.makeText(getApplicationContext(), "Número incorrecto, no se ha guardado", Toast.LENGTH_SHORT).show();

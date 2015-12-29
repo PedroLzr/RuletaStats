@@ -17,6 +17,11 @@ public class Tirada {
 
     public Tirada(){}
 
+    public Tirada(int id_ruleta, int numero){
+        this.id_ruleta = id_ruleta;
+        this.numero = numero;
+    }
+
     public Tirada(int id_ruleta, int id_crupier, int numero){
         this.id_ruleta = id_ruleta;
         this.id_crupier = id_crupier;
