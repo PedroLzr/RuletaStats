@@ -49,4 +49,12 @@ public class CrupierAdapter extends ArrayAdapter<Crupier> {
         return (item);
     }
 
+    public int getIDCrupierDesdeListView(int position){
+        return lista.get(position).getID();
+    }
+
+    public ArrayList<Crupier> getData(){
+        return lista;
+    }
+
 }

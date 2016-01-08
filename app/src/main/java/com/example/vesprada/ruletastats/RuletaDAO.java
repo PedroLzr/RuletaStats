@@ -71,4 +71,13 @@ public class RuletaDAO {
         return ruletas;
     }
 
+    public void borrarRuleta(int idRuleta){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+       /* String sql = "DELETE * FROM " + Ruleta.TABLE + " WHERE id = " + idRuleta + ";";
+        db.execSQL(sql); */
+
+        db.delete(Ruleta.TABLE, "id = " + idRuleta, null);
+    }
+
 }

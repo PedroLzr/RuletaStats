@@ -70,4 +70,13 @@ public class CrupierDAO {
         return crupiers;
     }
 
+    public void borrarCrupier(int idCrupier){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+       /* String sql = "DELETE * FROM " + Ruleta.TABLE + " WHERE id = " + idRuleta + ";";
+        db.execSQL(sql); */
+
+        db.delete(Crupier.TABLE, "id = " + idCrupier, null);
+    }
+
 }

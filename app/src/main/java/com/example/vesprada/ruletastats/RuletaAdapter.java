@@ -51,4 +51,8 @@ public class RuletaAdapter extends ArrayAdapter<Ruleta> {
         return (item);
     }
 
+    public int getIDRuletaDesdeListView(int position){
+        return lista.get(position).getID();
+    }
+
 }

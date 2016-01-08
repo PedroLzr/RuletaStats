@@ -275,6 +275,18 @@ public class TiradasActivity extends Activity{
 
                             Toast.makeText(getApplicationContext(), "Tirada guardada", Toast.LENGTH_SHORT).show();
 
+                            if(numero == 0){
+                                ultimoNumero.setTextColor(ultimoNumero.getContext().getResources().getColor(R.color.VERDE));
+                            }
+                            else if(numero == 1 || numero == 3 || numero == 5 || numero == 7 || numero == 9 || numero == 12
+                                    || numero == 14 || numero == 16 || numero == 18 || numero == 19 || numero == 21 || numero == 23
+                                    || numero == 25 || numero == 27 || numero == 30 || numero == 32 || numero == 34 || numero == 36){
+                                ultimoNumero.setTextColor(ultimoNumero.getContext().getResources().getColor(R.color.ROJO));
+                            }
+                            else{
+                                ultimoNumero.setTextColor(ultimoNumero.getContext().getResources().getColor(R.color.NEGRO));
+                            }
+
                             ultimoNumero.setText(String.valueOf(numero));
                         }
                     }
